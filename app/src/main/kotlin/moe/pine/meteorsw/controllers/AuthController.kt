@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletResponse
+import javax.validation.constraints.NotBlank
 
 
 @Controller
@@ -41,7 +43,14 @@ class AuthController(
     }
 
     @GetMapping("/oauth2/verify")
-    fun verify() {
+    fun verify(
+        response: HttpServletResponse,
+        @NotBlank @RequestParam("code") code: String,
+        @NotBlank @RequestParam("state") state: String
+    ) {
+        response.addHeader(HttpHeaders.PRAGMA, "no-cache")
+        response.addHeader(
+            HttpHeaders.CACHE_CONTROL, "private, no-cache, no-store, must-revalidate")
 
     }
 }
