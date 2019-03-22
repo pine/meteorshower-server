@@ -1,3 +1,6 @@
 rootProject.name = 'meteor-shower'
 
 include ':app'
+
+include ':lib-github'
+project(':lib-github').projectDir = new File(settingsDir, 'lib/github')

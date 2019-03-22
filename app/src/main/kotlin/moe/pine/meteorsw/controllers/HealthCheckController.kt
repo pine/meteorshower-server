@@ -1,5 +1,6 @@
 package moe.pine.meteorsw.controllers;
 
+import moe.pine.meteorsw.properties.AppProperties
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
@@ -9,14 +10,12 @@ import javax.servlet.http.HttpServletResponse
 
 
 @Controller
-class HealthCheckController {
-    companion object {
-        const val HOME_URL = "https://chrome.google.com/webstore/detail/dlnjecnemdcmfbgpldflopmhifdigocb"
-    }
-
+class HealthCheckController(
+        val appProperties: AppProperties
+) {
     @GetMapping("/")
     fun home(): String {
-        return String.format("redirect:%s", HOME_URL)
+        return String.format("redirect:%s", appProperties.siteUrl)
     }
 
     @GetMapping("/health", produces = [MediaType.TEXT_PLAIN_VALUE])
