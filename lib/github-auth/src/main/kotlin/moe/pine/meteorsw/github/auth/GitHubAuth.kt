@@ -5,6 +5,7 @@ import com.google.api.client.auth.oauth2.AuthorizationCodeTokenRequest
 import com.google.api.client.http.GenericUrl
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.common.annotations.VisibleForTesting
 import org.apache.commons.text.RandomStringGenerator
 import org.eclipse.egit.github.core.service.UserService
 import java.security.SecureRandom
@@ -38,6 +39,7 @@ class GitHubAuth {
     constructor(config: GitHubAuthConfig) :
         this(config, DEFAULT_RANDOM_STRING_GENERATOR, UserService())
 
+    @VisibleForTesting
     internal constructor(
         config: GitHubAuthConfig,
         randomStringGenerator: RandomStringGenerator,
@@ -81,10 +83,11 @@ class GitHubAuth {
         val accessToken = tokenResponse.accessToken
         userService.client.setOAuth2Token(accessToken)
 
+        val user = userService.user
         return GitHubAuthResult(
             accessToken = accessToken,
-            userName = userService.user.name,
-            userId = userService.user.id
+            userName = user.name,
+            userId = user.id
         )
     }
 }
