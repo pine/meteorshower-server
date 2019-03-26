@@ -3,6 +3,7 @@ package moe.pine.meteorsw.github.auth
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl
 import com.google.api.client.auth.oauth2.AuthorizationCodeTokenRequest
 import com.google.api.client.http.GenericUrl
+import com.google.api.client.http.HttpRequestInitializer
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.common.annotations.VisibleForTesting
@@ -15,6 +16,7 @@ class GitHubAuth {
     companion object {
         const val NONCE_LENGTH = 32
         const val STATE_LENGTH = 32
+        const val GRANT_TYPE_CODE = "authorization_code"
 
         val DEFAULT_RANDOM_STRING_GENERATOR: RandomStringGenerator =
             {
@@ -74,16 +76,24 @@ class GitHubAuth {
             code
         )
 
-        tokenRequest.grantType = "authorization_code"
+        // https://github.com/googleapis/google-oauth-java-client/issues/141
+        tokenRequest.requestInitializer =
+            HttpRequestInitializer { request ->
+                request.headers["Accept"] = "application/json"
+            }
+
+        tokenRequest.grantType = GRANT_TYPE_CODE
         tokenRequest.redirectUri = config.callbackUrl
         tokenRequest.set("client_id", config.clientId)
         tokenRequest.set("client_secret", config.clientSecret)
 
         val tokenResponse = tokenRequest.execute()
         val accessToken = tokenResponse.accessToken
-        userService.client.setOAuth2Token(accessToken)
 
+        // https://developer.github.com/v3/users/#get-the-authenticated-user
+        userService.client.setOAuth2Token(accessToken)
         val user = userService.user
+
         return GitHubAuthResult(
             accessToken = accessToken,
             userName = user.name,

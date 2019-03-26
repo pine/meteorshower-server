@@ -17,6 +17,10 @@
     <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
     <logger name="org.apache.catalina.core.AprLifecycleListener" level="WARN"/>
 
+    <!-- Lettuce -->
+    <logger name="io.lettuce.core" level="INFO"/>
+    <logger name="io.netty" level="INFO"/>
+
     <root>
         <level value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>

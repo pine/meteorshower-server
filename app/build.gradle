@@ -9,11 +9,12 @@ dependencies {
     // Spring Boot
     runtime 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.session:spring-session-data-redis'
+    implementation 'org.springframework.data:spring-data-redis'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'javax.servlet:javax.servlet-api'
-    
-    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    implementation 'com.google.oauth-client:google-oauth-client'
 
-    implementation 'org.apache.commons:commons-text'
+    implementation 'io.lettuce:lettuce-core'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+
 }

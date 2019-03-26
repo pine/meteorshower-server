@@ -49,15 +49,19 @@ subprojects {
     dependencyManagement {
         imports {
             mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+            mavenBom 'org.springframework.session:spring-session-bom:Bean-SR3'
             mavenBom 'com.google.oauth-client:google-oauth-client-bom:1.28.0'
             mavenBom 'com.google.http-client:google-http-client-bom:1.28.0'
             mavenBom "org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"
             mavenBom "com.fasterxml.jackson:jackson-bom:$jacksonVersion"
         }
         dependencies {
+            dependency 'org.springframework.data:spring-data-redis:2.1.5.RELEASE'
             dependency 'commons-codec:commons-codec:1.11'
             dependency 'org.apache.commons:commons-text:1.6'
             dependency 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:5.3.0.201903130848-r'
+            dependency 'com.google.code.gson:gson:2.8.5'
+            dependency 'io.lettuce:lettuce-core:5.1.5.RELEASE'
         }
     }
     dependencies {

@@ -15,7 +15,7 @@ class GitHubConfig {
         gitHubProperties: GitHubProperties
     ): GitHubAuthConfig {
         return GitHubAuthConfig(
-            callbackUrl = "",
+            callbackUrl = "http://localhost:8080/oauth2/verify",
             authorizeUrl = gitHubProperties.oauth2.authorizeUrl,
             accessTokenUrl = gitHubProperties.oauth2.accessTokenUrl,
             clientId = gitHubProperties.oauth2.clientId,
