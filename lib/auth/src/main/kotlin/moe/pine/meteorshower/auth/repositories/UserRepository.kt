@@ -11,6 +11,7 @@ interface UserRepository {
         SELECT *
         FROM `user`
         WHERE `user`.`id` = #{id}
+        LIMIT 1
     """)
     fun findById(id: Long): User?
 
@@ -18,6 +19,7 @@ interface UserRepository {
         SELECT *
         FROM `user`
         WHERE `user`.`twitter_id` = #{twitterId}
+        LIMIT 1
     """)
     fun findByTwitterId(twitterId: Int): User?
 
