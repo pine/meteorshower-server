@@ -1,7 +1,8 @@
 dependencies {
-    implementation 'com.google.oauth-client:google-oauth-client'
-    implementation 'com.google.http-client:google-http-client-jackson2:1.28.0'
     implementation 'com.google.code.gson:gson'
+    implementation 'com.google.oauth-client:google-oauth-client'
+    implementation 'com.google.http-client:google-http-client-jackson2'
+
     implementation 'org.apache.commons:commons-text'
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core'
 }

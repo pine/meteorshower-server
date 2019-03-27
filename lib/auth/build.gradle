@@ -1,0 +1,12 @@
+dependencies {
+    // MyBatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
+    runtime 'mysql:mysql-connector-java'
+
+    implementation 'org.apache.commons:commons-text'
+
+    testImplementation 'org.springframework:spring-test'
+    testImplementation 'junit:junit'
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.powermock:powermock-reflect'
+}

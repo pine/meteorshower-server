@@ -1,6 +1,9 @@
-rootProject.name = 'meteor-shower'
+rootProject.name = 'meteorshower-server'
 
 include ':app'
+
+include ':lib-auth'
+project(':lib-auth').projectDir = new File(settingsDir, 'lib/auth')
 
 include ':lib-github-auth'
 project(':lib-github-auth').projectDir = new File(settingsDir, 'lib/github-auth')
