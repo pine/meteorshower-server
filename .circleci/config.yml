@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11-jdk
-      - image: tkuchiki/delayed-mysql
+      - image: mysql:5.7.25
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
