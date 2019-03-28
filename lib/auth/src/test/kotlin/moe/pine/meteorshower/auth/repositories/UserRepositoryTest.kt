@@ -20,7 +20,7 @@ class UserRepositoryTest : TestBase() {
         val id = 12345L
         val user = User(
             id = id,
-            twitterId = 12345,
+            githubId = 12345,
             name = "Homura Akemi"
         )
 
@@ -34,28 +34,28 @@ class UserRepositoryTest : TestBase() {
             ?: return fail()
 
         assertEquals(id, foundUser.id)
-        assertEquals(user.twitterId, foundUser.twitterId)
+        assertEquals(user.githubId, foundUser.githubId)
         assertEquals(user.name, foundUser.name)
     }
 
     @Test
     fun addTest() {
         val user = User(
-            twitterId = 12345,
+            githubId = 12345,
             name = "Homura Akemi"
         )
 
-        val existedUser = userRepository.findByTwitterId(user.twitterId)
+        val existedUser = userRepository.findByGitHubId(user.githubId)
         assertNull(existedUser)
 
         val insertedCount = userRepository.add(user)
         assertEquals(1, insertedCount)
 
-        val foundUser = userRepository.findByTwitterId(user.twitterId)
+        val foundUser = userRepository.findByGitHubId(user.githubId)
             ?: return fail()
 
         assertNotNull(foundUser.id)
-        assertEquals(user.twitterId, foundUser.twitterId)
+        assertEquals(user.githubId, foundUser.githubId)
         assertEquals(user.name, foundUser.name)
         assertNotNull(foundUser.createdAt)
         assertNotNull(foundUser.updatedAt)

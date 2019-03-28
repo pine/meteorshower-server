@@ -18,19 +18,19 @@ interface UserRepository {
     @Select("""
         SELECT *
         FROM `user`
-        WHERE `user`.`twitter_id` = #{twitterId}
+        WHERE `user`.`github_id` = #{githubId}
         LIMIT 1
     """)
-    fun findByTwitterId(twitterId: Int): User?
+    fun findByGitHubId(githubId: Int): User?
 
     @Insert("""
         INSERT INTO `user` (
             `id`,
-            `twitter_id`,
+            `github_id`,
             `name`
         ) VALUES (
             #{id},
-            #{twitterId},
+            #{githubId},
             #{name}
         )
     """)
