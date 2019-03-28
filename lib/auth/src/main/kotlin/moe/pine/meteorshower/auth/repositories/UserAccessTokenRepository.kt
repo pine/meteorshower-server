@@ -12,6 +12,7 @@ interface UserAccessTokenRepository {
         SELECT *
         FROM `user_access_token`
         WHERE `user_access_token`.`access_token` = #{accessToken}
+        LIMIT 1
     """)
     fun findByAccessToken(accessToken: String) : UserAccessToken?
 
@@ -24,6 +25,8 @@ interface UserAccessTokenRepository {
     @Delete("""
         DELETE FROM `user_access_token`
         WHERE `user_access_token`.`access_token` = #{accessToken}
+            AND `user_access_token`.`user_id` = #{userId}
+        LIMIT 1
     """)
     fun remove(userAccessToken: UserAccessToken) : Long
 }

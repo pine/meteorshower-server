@@ -6,7 +6,8 @@ import moe.pine.meteorshower.auth.models.UserAccessToken
 import moe.pine.meteorshower.auth.repositories.UserAccessTokenRepository
 import moe.pine.meteorshower.auth.repositories.UserRepository
 import moe.pine.meteorshower.github.auth.GitHubAuth
-import moe.pine.meteorshower.sessions.AuthSession
+import moe.pine.meteorshower.scoped.AuthFlow
+import moe.pine.meteorshower.scoped.Authenticated
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Component
 @Component
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
 class AuthService(
-    private val authSession: AuthSession,
+    private val authFlow: AuthFlow,
+    private val authenticated: Authenticated,
     private val githubAuth: GitHubAuth,
     private val userRepository: UserRepository,
     private val userAccessTokenRepository: UserAccessTokenRepository,
@@ -34,8 +36,8 @@ class AuthService(
             authRequest.redirectUrl,
             authRequest.state)
 
-        authSession.callbackUrl = callbackUrl
-        authSession.state = authRequest.state
+        authFlow.callbackUrl = callbackUrl
+        authFlow.state = authRequest.state
 
         return authRequest.redirectUrl
     }
@@ -44,14 +46,14 @@ class AuthService(
         code: String,
         state: String
     ): AuthVerifyResult {
-        val callbackUrl = authSession.callbackUrl
+        val callbackUrl = authFlow.callbackUrl
         LOGGER.debug(
             "OAuth2 verification started :: " +
                 "code={}, state={}, saved-state={}, callback-url={}",
-            code, state, authSession.state, callbackUrl)
+            code, state, authFlow.state, callbackUrl)
 
-        if (state != authSession.state) {
-            throw AuthStateMismatchException()
+        if (state != authFlow.state) {
+            throw AuthStateMismatchException(callbackUrl)
         }
 
         val authResult = githubAuth.verify(code)
@@ -98,11 +100,12 @@ class AuthService(
             return savedUser
         }
 
-        throw RuntimeException()
+        throw AuthUserSaveFailureException()
     }
 
     fun issueAccessToken(user: User): String {
-        val userId = user.id ?: throw RuntimeException()
+        val userId = user.id
+            ?: throw IllegalArgumentException("invalid user")
 
         val accessToken = accessTokenGenerator.generate()
         val userAccessToken =
@@ -110,8 +113,19 @@ class AuthService(
                 userId = userId,
                 accessToken = accessToken
             )
-        userAccessTokenRepository.add(userAccessToken)
+
+        val insertedCount = userAccessTokenRepository.add(userAccessToken)
+        if (insertedCount != 1L) {
+            throw AuthAccessTokenIssueFailureException()
+        }
 
         return accessToken
+    }
+
+    fun revoke() {
+        val userAccessToken = authenticated.userAccessToken
+        if (userAccessToken != null) {
+            userAccessTokenRepository.remove(userAccessToken)
+        }
     }
 }

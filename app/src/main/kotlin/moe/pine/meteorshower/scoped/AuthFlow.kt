@@ -1,4 +1,4 @@
-package moe.pine.meteorshower.sessions
+package moe.pine.meteorshower.scoped
 
 import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.stereotype.Component
@@ -7,7 +7,7 @@ import java.io.Serializable
 
 @Component
 @SessionScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-data class AuthSession(
+data class AuthFlow(
     var callbackUrl: String = "",
     var state: String = ""
 ) : Serializable {

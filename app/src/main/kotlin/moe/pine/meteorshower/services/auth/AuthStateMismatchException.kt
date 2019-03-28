@@ -1,3 +1,5 @@
 package moe.pine.meteorshower.services.auth
 
-class AuthStateMismatchException : RuntimeException()
+class AuthStateMismatchException(
+    val callbackUrl: String = ""
+) : RuntimeException("`state` mismatch")

@@ -14,11 +14,11 @@ import java.security.SecureRandom
 
 class GitHubAuth {
     companion object {
-        const val NONCE_LENGTH = 32
-        const val STATE_LENGTH = 32
-        const val GRANT_TYPE_CODE = "authorization_code"
+        private const val NONCE_LENGTH = 32
+        private const val STATE_LENGTH = 32
+        private const val GRANT_TYPE_CODE = "authorization_code"
 
-        val DEFAULT_RANDOM_STRING_GENERATOR: RandomStringGenerator =
+        private val DEFAULT_RANDOM_STRING_GENERATOR: RandomStringGenerator =
             {
                 val random = SecureRandom.getInstanceStrong()
                 val randomStringGenerator =

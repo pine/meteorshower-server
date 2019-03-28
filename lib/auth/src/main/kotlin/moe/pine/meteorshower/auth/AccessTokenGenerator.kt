@@ -5,7 +5,7 @@ import java.security.SecureRandom
 
 class AccessTokenGenerator {
     companion object {
-        const val TOKEN_LENGTH = 256
+        const val TOKEN_LENGTH = 64
         val DEFAULT_RANDOM_STRING_GENERATOR: RandomStringGenerator =
             {
                 val random = SecureRandom.getInstanceStrong()
