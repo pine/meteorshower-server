@@ -1,7 +1,7 @@
 package moe.pine.meteorshower.controllers
 
 import moe.pine.meteorshower.services.auth.AuthAccessTokenIssueFailureException
-import moe.pine.meteorshower.services.auth.AuthService
+import moe.pine.meteorshower.services.auth.AuthFlowService
 import moe.pine.meteorshower.services.auth.AuthStateMismatchException
 import moe.pine.meteorshower.services.auth.AuthUserSaveFailureException
 import org.slf4j.Logger
@@ -18,7 +18,7 @@ import javax.validation.constraints.NotBlank
 
 @Controller
 class AuthController(
-    private val authService: AuthService
+    private val authFlowService: AuthFlowService
 ) {
     companion object {
         private val LOGGER: Logger =
@@ -29,7 +29,7 @@ class AuthController(
     fun request(
         @NotBlank @RequestParam("callback_url") callbackUrl: String
     ): String {
-        val redirectUrl = authService.request(callbackUrl)
+        val redirectUrl = authFlowService.request(callbackUrl)
         return "redirect:$redirectUrl"
     }
 
@@ -41,7 +41,7 @@ class AuthController(
     ) {
         val verifyResult =
             try {
-                authService.verify(code = code, state = state)
+                authFlowService.verify(code = code, state = state)
             } catch (e: AuthStateMismatchException) {
                 e.printStackTrace()
 
@@ -62,7 +62,7 @@ class AuthController(
 
         val user =
             try {
-                authService.findOrCreateUser(
+                authFlowService.findOrCreateUser(
                     githubId = verifyResult.githubId,
                     name = verifyResult.name
                 )
@@ -81,7 +81,7 @@ class AuthController(
 
         val accessToken =
             try {
-                authService.issueAccessToken(user)
+                authFlowService.issueAccessToken(user)
             } catch (e: AuthAccessTokenIssueFailureException) {
                 e.printStackTrace()
 
@@ -106,7 +106,7 @@ class AuthController(
 
     @PostMapping("/oauth2/revoke")
     fun revoke(response: HttpServletResponse) {
-        authService.revoke()
+        authFlowService.revoke()
         response.sendError(HttpStatus.NO_CONTENT.value())
     }
 }

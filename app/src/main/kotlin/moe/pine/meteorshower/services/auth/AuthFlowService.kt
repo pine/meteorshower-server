@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
-class AuthService(
+class AuthFlowService(
     private val authFlow: AuthFlow,
     private val authenticated: Authenticated,
     private val githubAuth: GitHubAuth,
@@ -24,7 +24,7 @@ class AuthService(
 ) {
     companion object {
         private val LOGGER: Logger =
-            LoggerFactory.getLogger(AuthService::class.java)
+            LoggerFactory.getLogger(AuthFlowService::class.java)
     }
 
     fun request(callbackUrl: String): String {
