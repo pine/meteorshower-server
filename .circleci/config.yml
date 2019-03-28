@@ -3,6 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11-jdk
+      - image: tkuchiki/delayed-mysql
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: meteorshower_test
 
     working_directory: ~/repo
     environment:
@@ -14,6 +19,9 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run:
           name: Test
           command: ./gradlew test
