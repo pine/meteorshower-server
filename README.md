@@ -5,10 +5,23 @@
 <br>
 <br>
 
+## Requirements
+
+- Java 11
+- MySQL
+- Redis
+
 ## Libraries
 
 - Spring Boot 2.x
 - MyBatis
+
+## Getting started
+
+```
+$ ./scripts/setup_mysql.sh
+$ ./gradlew :app:bootRun
+```
 
 ## See also
 
