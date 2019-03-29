@@ -3,8 +3,8 @@ package moe.pine.meteorshower.auth.models
 import java.time.LocalDateTime
 
 data class UserAccessToken(
-    var userId: Long,
-    var accessToken: String,
-    var createdAt: LocalDateTime? = null,
-    var updatedAt: LocalDateTime? = null
+    val userId: Long,
+    val accessToken: String,
+    val createdAt: LocalDateTime? = null,
+    val updatedAt: LocalDateTime? = null
 )
