@@ -1,0 +1,23 @@
+spring:
+  session:
+    store-type: redis
+    redis:
+      namespace: 'spring:session'
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/meteorshower?useSSL=false
+    username: root
+    password:
+    type: com.zaxxer.hikari.HikariDataSource
+  redis:
+    host: localhost
+    password:
+    port: 6379
+
+github:
+  oauth2:
+    callback-url: http://localhost:8080/oauth2/verify
+    authorize-url: https://github.com/login/oauth/authorize
+    access-token-url: https://github.com/login/oauth/access_token
+    client-id: xxxxxxxxxxxxxxxxxxxx
+    client-secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

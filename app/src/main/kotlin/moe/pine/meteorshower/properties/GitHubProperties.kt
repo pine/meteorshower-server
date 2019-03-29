@@ -7,6 +7,7 @@ class GitHubProperties(
     var oauth2: OAuth2 = OAuth2()
 ) {
     class OAuth2(
+        var callbackUrl: String = "",
         var authorizeUrl: String = "",
         var accessTokenUrl: String = "",
         var clientId: String = "",
