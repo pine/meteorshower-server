@@ -6,5 +6,9 @@
 - Spring Boot 2.x
 - MyBatis
 
+## See also
+
+- [meteorshower-app](https://github.com/pine/meteorshower-app)
+
 ## License
 MIT &copy; [Pine Mizune](https://profile.pine.moe)
