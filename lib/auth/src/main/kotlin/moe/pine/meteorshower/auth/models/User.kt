@@ -8,4 +8,8 @@ data class User(
     var name: String,
     var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null
-)
+) {
+    fun requestId(): Long {
+        return id ?: throw IllegalStateException("`id` should not be null")
+    }
+}

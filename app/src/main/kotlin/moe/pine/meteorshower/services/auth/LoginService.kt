@@ -5,9 +5,9 @@ import moe.pine.meteorshower.auth.repositories.UserRepository
 import moe.pine.meteorshower.scoped.Authenticated
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
-@Component
+@Service
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
 class LoginService(
     val authenticated: Authenticated,
