@@ -97,7 +97,7 @@ class GitHubAuth {
         return GitHubAuthResult(
             accessToken = accessToken,
             userName = user.name,
-            userId = user.id
+            userId = user.id.toLong()
         )
     }
 }

@@ -28,6 +28,8 @@
 
     <!-- MyBatis -->
     <logger name="org.mybatis.spring.mapper.ClassPathMapperScanner" level="WARN"/>
+    <logger name="org.mybatis.spring.SqlSessionUtils" level="INFO"/>
+    <logger name="org.mybatis.spring.transaction.SpringManagedTransaction" level="INFO"/>
 
     <!-- Reactor -->
     <logger name="reactor.core.publisher.UnsafeSupport" level="WARN"/>

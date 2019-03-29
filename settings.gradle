@@ -7,3 +7,6 @@ project(':lib-auth').projectDir = new File(settingsDir, 'lib/auth')
 
 include ':lib-github-auth'
 project(':lib-github-auth').projectDir = new File(settingsDir, 'lib/github-auth')
+
+include ':lib-setting'
+project(':lib-setting').projectDir = new File(settingsDir, 'lib/setting')

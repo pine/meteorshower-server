@@ -1,5 +1,6 @@
 package moe.pine.meteorshower.auth
 
+import com.google.common.annotations.VisibleForTesting
 import org.apache.commons.text.RandomStringGenerator
 import java.security.SecureRandom
 
@@ -25,6 +26,7 @@ class AccessTokenGenerator {
 
     constructor() : this(DEFAULT_RANDOM_STRING_GENERATOR)
 
+    @VisibleForTesting
     internal constructor(randomStringGenerator: RandomStringGenerator) {
         this.randomStringGenerator = randomStringGenerator
     }

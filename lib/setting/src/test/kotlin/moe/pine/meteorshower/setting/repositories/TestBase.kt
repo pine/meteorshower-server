@@ -1,4 +1,4 @@
-package moe.pine.meteorshower.auth.repositories
+package moe.pine.meteorshower.setting.repositories
 
 import org.apache.ibatis.io.Resources
 import org.apache.ibatis.jdbc.ScriptRunner

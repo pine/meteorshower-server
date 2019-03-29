@@ -70,7 +70,7 @@ class AuthFlowService(
     }
 
     fun findOrCreateUser(
-        githubId: Int,
+        githubId: Long,
         name: String
     ): User {
         val existedUser = userRepository.findByGitHubId(githubId)

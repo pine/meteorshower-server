@@ -1,9 +1,6 @@
-DROP TABLE IF EXISTS `user`;
-DROP TABLE IF EXISTS `user_access_token`;
-
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `github_id` int(11) NOT NULL,
+  `github_id` bigint(20) NOT NULL,
   `name` TEXT NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

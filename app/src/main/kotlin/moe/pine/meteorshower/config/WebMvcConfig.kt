@@ -16,6 +16,7 @@ class WebMvcConfig(
             .addInterceptor(noCacheInterceptor)
             .addPathPatterns("/health")
             .addPathPatterns("/oauth2/**")
+            .addPathPatterns("/api/**")
 
         registry
             .addInterceptor(loginInterceptor)

@@ -21,7 +21,7 @@ interface UserRepository {
         WHERE `user`.`github_id` = #{githubId}
         LIMIT 1
     """)
-    fun findByGitHubId(githubId: Int): User?
+    fun findByGitHubId(githubId: Long): User?
 
     @Insert("""
         INSERT INTO `user` (

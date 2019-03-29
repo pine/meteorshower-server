@@ -11,4 +11,8 @@ import org.springframework.web.context.annotation.RequestScope
 data class Authenticated(
     var user: User? = null,
     var userAccessToken: UserAccessToken? = null
-)
+) {
+    fun requestUser(): User {
+        return user ?: throw IllegalStateException("`user` should not be null")
+    }
+}
