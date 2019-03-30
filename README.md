@@ -25,7 +25,7 @@ $ ./gradlew :app:bootRun
 
 ## Development
 
-```
+```sh
 # Edit your local configure
 $ cp app/src/main/resources/application-sample.yml app/src/main/resources/application-local.yml
 $ vim app/src/main/resources/application-local.yml
