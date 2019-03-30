@@ -23,6 +23,17 @@ $ ./scripts/setup_mysql.sh
 $ ./gradlew :app:bootRun
 ```
 
+## Development
+
+```
+# Edit your local configure
+$ cp app/src/main/resources/application-sample.yml app/src/main/resources/application-local.yml
+$ vim app/src/main/resources/application-local.yml
+
+# Run HTTP server
+$ ./gradlew :app:bootRun
+```
+
 ## See also
 
 - [meteorshower-app](https://github.com/pine/meteorshower-app)
