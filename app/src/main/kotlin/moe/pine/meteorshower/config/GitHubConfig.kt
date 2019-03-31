@@ -6,6 +6,7 @@ import moe.pine.meteorshower.properties.GitHubProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.security.SecureRandom
 
 @Configuration
 @EnableConfigurationProperties(GitHubProperties::class)
@@ -25,8 +26,12 @@ class GitHubConfig {
 
     @Bean
     fun githubAuth(
-        gitHubAuthConfig: GitHubAuthConfig
+        gitHubAuthConfig: GitHubAuthConfig,
+        secureRandom: SecureRandom
     ): GitHubAuth {
-        return GitHubAuth(gitHubAuthConfig)
+        return GitHubAuth(
+            config = gitHubAuthConfig,
+            random = secureRandom
+        )
     }
 }

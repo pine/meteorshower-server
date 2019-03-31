@@ -9,7 +9,7 @@ import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.common.annotations.VisibleForTesting
 import org.apache.commons.text.RandomStringGenerator
 import org.eclipse.egit.github.core.service.UserService
-import java.security.SecureRandom
+import java.util.Random
 
 
 class GitHubAuth {
@@ -17,29 +17,14 @@ class GitHubAuth {
         private const val NONCE_LENGTH = 32
         private const val STATE_LENGTH = 32
         private const val GRANT_TYPE_CODE = "authorization_code"
-
-        private val DEFAULT_RANDOM_STRING_GENERATOR: RandomStringGenerator =
-            {
-                val random = SecureRandom.getInstanceStrong()
-                val randomStringGenerator =
-                    RandomStringGenerator.Builder()
-                        .withinRange(
-                            charArrayOf('a', 'z'),
-                            charArrayOf('A', 'Z'),
-                            charArrayOf('0', '9'))
-                        .usingRandom(random::nextInt)
-                        .build()
-                randomStringGenerator
-            }()
     }
-
 
     private val config: GitHubAuthConfig
     private val randomStringGenerator: RandomStringGenerator
     private val userService: UserService
 
-    constructor(config: GitHubAuthConfig) :
-        this(config, DEFAULT_RANDOM_STRING_GENERATOR, UserService())
+    constructor(config: GitHubAuthConfig, random: Random) :
+        this(config, RandomStringGeneratorFactory.newInstance(random), UserService())
 
     @VisibleForTesting
     internal constructor(

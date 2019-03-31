@@ -33,8 +33,8 @@ $ heroku plugins:install java
 $ heroku config:set SPRING_PROFILES_ACTIVE=prod
 $ heroku config:set TZ=Asia/Tokyo
 
-$ heroku addons:create cleardb:ignite
-$ heroku config | fgrep CLEARDB_DATABASE_URL
+$ heroku addons:create jawsdb:kitefin
+$ heroku config | fgrep JAWSDB_URL
 
 $ heroku addons:create heroku-redis:hobby-dev
 $ heroku config | fgrep REDIS_URL
