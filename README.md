@@ -23,6 +23,18 @@ $ ./scripts/setup_mysql.sh
 $ ./gradlew :app:bootRun
 ```
 
+## Deployment
+
+```sh
+$ ./gradlew :app:assemble
+
+$ heroku apps:create your-app
+$ heroku plugins:install java
+$ heroku config:set SPRING_PROFILES_ACTIVE=prod
+$ heroku config:set TZ=Asia/Tokyo
+$ heroku deploy:jar --jar app/build/libs/app.jar --jdk 11
+```
+
 ## Development
 
 ```sh
