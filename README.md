@@ -26,8 +26,6 @@ $ ./gradlew :app:bootRun
 ## Deployment
 
 ```sh
-$ ./gradlew :app:assemble
-
 $ heroku apps:create your-app
 $ heroku plugins:install java
 $ heroku config:set SPRING_PROFILES_ACTIVE=prod
@@ -39,6 +37,8 @@ $ heroku config | fgrep JAWSDB_URL
 $ heroku addons:create heroku-redis:hobby-dev
 $ heroku config | fgrep REDIS_URL
 
+$ vim app/src/main/resources/application-prod.yml
+$ ./gradlew :app:assemble
 $ heroku deploy:jar --jar app/build/libs/app.jar --jdk 11
 ```
 
