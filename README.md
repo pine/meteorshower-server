@@ -36,6 +36,9 @@ $ heroku config:set TZ=Asia/Tokyo
 $ heroku addons:create cleardb:ignite
 $ heroku config | fgrep CLEARDB_DATABASE_URL
 
+$ heroku addons:create heroku-redis:hobby-dev
+$ heroku config | fgrep REDIS_URL
+
 $ heroku deploy:jar --jar app/build/libs/app.jar --jdk 11
 ```
 
