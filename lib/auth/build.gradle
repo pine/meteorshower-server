@@ -3,12 +3,16 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
     runtime 'mysql:mysql-connector-java'
 
+    // Utilities
     implementation 'com.google.guava:guava'
     implementation 'org.apache.commons:commons-text'
 
+    // Test
     testImplementation 'org.springframework:spring-test'
     testImplementation 'junit:junit'
     testImplementation 'org.mockito:mockito-core'
+
+    // PowerMock
     testImplementation 'org.powermock:powermock-core'
     testImplementation 'org.powermock:powermock-reflect'
     testImplementation 'org.powermock:powermock-module-junit4'
