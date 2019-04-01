@@ -1,9 +1,24 @@
 dependencies {
-    implementation 'com.google.code.gson:gson'
+    // OAuth
     implementation 'com.google.oauth-client:google-oauth-client'
     implementation 'com.google.http-client:google-http-client-jackson2'
 
-    implementation 'org.apache.commons:commons-text'
+    // GitHub
+    implementation 'com.google.code.gson:gson'
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core'
+
+    // Utilities
+    implementation 'org.apache.commons:commons-text'
     implementation 'org.slf4j:slf4j-api'
+
+    // Test
+    testImplementation 'junit:junit'
+    testImplementation 'org.mockito:mockito-core'
+
+    // PowerMock
+    testImplementation 'org.powermock:powermock-core'
+    testImplementation 'org.powermock:powermock-reflect'
+    testImplementation 'org.powermock:powermock-module-junit4'
+    testImplementation 'org.powermock:powermock-module-junit4-rule'
+    testImplementation 'org.powermock:powermock-api-mockito2'
 }

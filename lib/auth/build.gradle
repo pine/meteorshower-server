@@ -8,9 +8,9 @@ dependencies {
     implementation 'org.apache.commons:commons-text'
 
     // Test
-    testImplementation 'org.springframework:spring-test'
     testImplementation 'junit:junit'
     testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // PowerMock
     testImplementation 'org.powermock:powermock-core'
