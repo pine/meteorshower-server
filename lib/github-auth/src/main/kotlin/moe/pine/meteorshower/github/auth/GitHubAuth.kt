@@ -14,8 +14,12 @@ import java.util.Random
 
 class GitHubAuth {
     companion object {
-        private const val NONCE_LENGTH = 32
-        private const val STATE_LENGTH = 32
+        @VisibleForTesting
+        internal const val NONCE_LENGTH = 32
+
+        @VisibleForTesting
+        internal const val STATE_LENGTH = 32
+
         private const val GRANT_TYPE_CODE = "authorization_code"
     }
 
@@ -30,7 +34,7 @@ class GitHubAuth {
     internal constructor(
         config: GitHubAuthConfig,
         randomStringGenerator: RandomStringGenerator,
-        userService: UserService = UserService()
+        userService: UserService
     ) {
         this.config = config
         this.randomStringGenerator = randomStringGenerator
