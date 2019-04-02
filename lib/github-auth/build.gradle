@@ -2,6 +2,7 @@ dependencies {
     // OAuth
     implementation 'com.google.oauth-client:google-oauth-client'
     implementation 'com.google.http-client:google-http-client-jackson2'
+    testImplementation 'com.google.http-client:google-http-client-test:1.29.0'
 
     // GitHub
     implementation 'com.google.code.gson:gson'

@@ -4,6 +4,7 @@ import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl
 import com.google.api.client.auth.oauth2.AuthorizationCodeTokenRequest
 import com.google.api.client.http.GenericUrl
 import com.google.api.client.http.HttpRequestInitializer
+import com.google.api.client.http.HttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.common.annotations.VisibleForTesting
@@ -26,19 +27,27 @@ class GitHubAuth {
     private val config: GitHubAuthConfig
     private val randomStringGenerator: RandomStringGenerator
     private val userService: UserService
+    private val httpTransport: HttpTransport
 
     constructor(config: GitHubAuthConfig, random: Random) :
-        this(config, RandomStringGeneratorFactory.newInstance(random), UserService())
+        this(
+            config,
+            RandomStringGeneratorFactory.newInstance(random),
+            UserService(),
+            NetHttpTransport()
+        )
 
     @VisibleForTesting
     internal constructor(
         config: GitHubAuthConfig,
         randomStringGenerator: RandomStringGenerator,
-        userService: UserService
+        userService: UserService,
+        httpTransport: HttpTransport
     ) {
         this.config = config
         this.randomStringGenerator = randomStringGenerator
         this.userService = userService
+        this.httpTransport = httpTransport
     }
 
     fun request(): GitHubAuthRequest {
@@ -59,7 +68,7 @@ class GitHubAuth {
 
     fun verify(code: String): GitHubAuthResult {
         val tokenRequest = AuthorizationCodeTokenRequest(
-            NetHttpTransport(),
+            httpTransport,
             JacksonFactory(),
             GenericUrl(config.accessTokenUrl),
             code
