@@ -126,6 +126,24 @@ class UserAccessTokenRepositoryTest : TestBase() {
     }
 
     @Test
+    fun updateTest_userIdNonMatch() {
+        val userAccessToken = UserAccessToken(
+            userId = 12345L,
+            accessToken = "homuhomu",
+            lastAccessedAt = null
+        )
+        val insertedCount = userAccessTokenRepository.add(userAccessToken)
+        assertEquals(1, insertedCount)
+
+        val lastAccessedAt = LocalDateTime.of(2019, 4, 3, 11, 44, 0)
+        val updatedCount = userAccessTokenRepository.update(
+            userAccessToken.copy(
+                userId = 99999L,
+                lastAccessedAt = lastAccessedAt))
+        assertEquals(0, updatedCount)
+    }
+
+    @Test
     fun removeTest() {
         val userAccessToken = UserAccessToken(
             userId = 12345L,
