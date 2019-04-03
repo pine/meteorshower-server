@@ -6,6 +6,7 @@ import moe.pine.meteorshower.scoped.Authenticated
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
@@ -34,8 +35,15 @@ class LoginService(
                 "The user not found :: access-token=$accessToken, user-id=${userAccessToken.userId}")
 
         LOGGER.debug(
-            "Login successful :: user-id={}, github-id={}, access-token={}",
-            user.id, user.githubId, accessToken)
+            "Login successful :: access-token={}, user-id={}, github-id={}, last-accessed-at={}",
+            accessToken, user.id, user.githubId, userAccessToken.lastAccessedAt)
+
+        val updatedUserAccessToken =
+            userAccessToken.copy(
+                lastAccessedAt = LocalDateTime.now()
+            )
+        val updatedCount = userAccessTokenRepository.update(updatedUserAccessToken)
+        assert(updatedCount == 1L)
 
         authenticated.user = user
         authenticated.userAccessToken = userAccessToken

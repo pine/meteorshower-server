@@ -11,6 +11,7 @@ import moe.pine.meteorshower.scoped.Authenticated
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
@@ -111,7 +112,8 @@ class AuthFlowService(
         val userAccessToken =
             UserAccessToken(
                 userId = userId,
-                accessToken = accessToken
+                accessToken = accessToken,
+                lastAccessedAt = LocalDateTime.now()
             )
 
         val insertedCount = userAccessTokenRepository.add(userAccessToken)
