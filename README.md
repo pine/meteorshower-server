@@ -43,6 +43,15 @@ $ heroku deploy:jar --jar app/build/libs/app.jar --jdk 11
 ```
 
 ## Development
+## JDK
+For macOS users.
+
+```
+$ brew tap adoptopenjdk/openjdk
+$ brew cask install adoptopenjdk11
+```
+
+## How to run server on local machine?
 
 ```sh
 # Edit your local configure
