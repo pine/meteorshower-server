@@ -8,13 +8,16 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
           MYSQL_DATABASE: meteorshower_test
-
     working_directory: ~/repo
     environment:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
     steps:
       - checkout
+      - run:
+          name: Checkout submodule
+          command: |
+            git submodule update --init
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
