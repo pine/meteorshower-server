@@ -6,6 +6,7 @@ dependencies {
     // Sub projects
     implementation project(':lib-auth')
     implementation project(':lib-github-auth')
+    implementation project(':lib-health')
     implementation project(':lib-setting')
 
     // Spring Boot
@@ -30,4 +31,10 @@ dependencies {
     testImplementation 'junit:junit'
     testImplementation 'org.mockito:mockito-core'
 
+    // PowerMock
+    testImplementation 'org.powermock:powermock-core'
+    testImplementation 'org.powermock:powermock-reflect'
+    testImplementation 'org.powermock:powermock-module-junit4'
+    testImplementation 'org.powermock:powermock-module-junit4-rule'
+    testImplementation 'org.powermock:powermock-api-mockito2'
 }

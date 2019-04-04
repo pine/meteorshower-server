@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 import java.security.SecureRandom
 
 @Configuration
-@MapperScan("moe.pine.meteorshower.auth")
+@MapperScan("moe.pine.meteorshower.auth.repositories")
 class AuthConfig {
     @Bean
     fun accessTokenGenerator(secureRandom: SecureRandom): AccessTokenGenerator {

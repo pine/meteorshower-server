@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean
 
 
 @Configuration
-@MapperScan("moe.pine.meteorshower.setting")
+@MapperScan("moe.pine.meteorshower.setting.repositories")
 class SettingConfig {
     @Bean
     fun configureRedisAction(): ConfigureRedisAction {

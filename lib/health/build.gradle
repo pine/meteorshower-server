@@ -1,0 +1,6 @@
+dependencies {
+    // MyBatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
+    runtime 'mysql:mysql-connector-java'
+
+}
