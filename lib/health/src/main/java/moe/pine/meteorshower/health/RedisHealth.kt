@@ -1,7 +1,12 @@
 package moe.pine.meteorshower.health
 
-class RedisHealth : Health {
+import org.springframework.data.redis.core.RedisTemplate
+
+class RedisHealth(
+    private val redisTemplate: RedisTemplate<String, String>
+) : Health {
     override fun alive(): Boolean {
-        return true
+        val ping = redisTemplate.execute { conn -> conn.ping() ?: "" }
+        return ping == "PONG"
     }
 }
