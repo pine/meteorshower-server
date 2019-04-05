@@ -16,7 +16,7 @@ class SettingService(
     val userExcludedRepositoryRepository: UserExcludedRepositoryRepository,
     val transactionTemplate: TransactionTemplate
 ) {
-    fun load(): Setting {
+    fun get(): Setting {
         val user = authenticated.requestUser()
         val userId = user.requestId()
 
