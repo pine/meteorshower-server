@@ -55,6 +55,7 @@ class UserRepositoryTest : TestBase() {
             ?: return fail()
 
         assertNotNull(foundUser.id)
+        assertEquals(foundUser.id, user.id) // useGeneratedKeys
         assertEquals(user.githubId, foundUser.githubId)
         assertEquals(user.name, foundUser.name)
         assertNotNull(foundUser.createdAt)
