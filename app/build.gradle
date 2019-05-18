@@ -25,6 +25,7 @@ dependencies {
 
     // Utilities
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'moe.pine:heroku-addons'
     compileOnly 'javax.servlet:javax.servlet-api'
 
     // Test
