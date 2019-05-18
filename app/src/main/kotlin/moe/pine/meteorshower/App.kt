@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
     val redisUrl = System.getenv("REDIS_URL") ?: ""
     if (redisUrl.isNotEmpty()) {
         val parsedUri = URI.create(redisUrl)
-        val password = parsedUri.userInfo.split(":")[1]
+        val password = parsedUri.userInfo.split(":", limit = 2)[1]
         App.LOGGER.debug("spring.redis.host={}", parsedUri.host)
         App.LOGGER.debug("spring.redis.password={}", password)
         App.LOGGER.debug("spring.redis.port={}", parsedUri.port)
