@@ -16,7 +16,9 @@ fun main(args: Array<String>) {
     val redisUrl = System.getenv("REDIS_URL") ?: ""
     if (redisUrl.isNotEmpty()) {
         val parsedUri = URI.create(redisUrl)
-        println(parsedUri)
+        System.setProperty("spring.redis.host", parsedUri.host)
+        System.setProperty("spring.redis.password", parsedUri.authority)
+        System.setProperty("spring.redis.port", parsedUri.port.toString())
     }
 
     runApplication<App>(*args)
