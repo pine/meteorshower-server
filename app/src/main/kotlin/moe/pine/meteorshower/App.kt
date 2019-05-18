@@ -30,7 +30,8 @@ fun main(args: Array<String>) {
     if (JawsDBMySQL.isDetected()) {
         System.setProperty("spring.datasource.url",
             String.format(
-                "jdbc:mysql://%s:%d/%s?useSSL=false&useUnicode=true&characterEncoding=utf8",
+                "jdbc:mysql://%s:%d/%s" +
+                    "?useSSL=false&sslMode=DISABLED&useUnicode=true&characterEncoding=utf8",
                 JawsDBMySQL.getHost(),
                 JawsDBMySQL.getPort(),
                 JawsDBMySQL.getDatabase()));
